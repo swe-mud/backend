@@ -11,7 +11,7 @@ To run the code, please install the newest `node js`, `sqlite` and `typescript t
   Have fun.
 
 # Project structure
-- src (All code for the backend/api)
+- src/ (All code for the backend/api)
   - app/ (Place for the game application (logic etc.))
   - config/ (Configdirectory to load values from .env files)
   - controllers/ (HTTP-Controllers for the api)
