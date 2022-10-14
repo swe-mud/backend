@@ -131,3 +131,5 @@ dist
 
 # jetbrains ides
 .idea/
+
+.src/script.ts
