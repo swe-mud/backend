@@ -26,7 +26,7 @@ export default class Player {
     }
 
     addItemToInventory(item: Item): void {
-
+        this.playerInventory.addItem(item);
     }
 
     destoryItemInInventory(slot: number): void{
