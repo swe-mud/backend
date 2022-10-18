@@ -2,10 +2,10 @@ import Item from "./Item";
 
 export default class Inventory {
     items: Item[];
-    slots: number;
+    maxInventorySlots: number;
 
     constructor() {
-        this.slots = 5;
+        this.maxInventorySlots = 5;
         this.items = [];
     }
 
@@ -14,7 +14,7 @@ export default class Inventory {
     }
 
     addItem(item: Item): void {
-        if (this.items.length <= 5) {
+        if (this.items.length < this.maxInventorySlots) {
             this.items.push(item)
         }
         else {
@@ -27,6 +27,12 @@ export default class Inventory {
     } 
 
     destroyItem(slot: number): void {
+        if (this.items.length <= slot && slot > 0) {
+            this.items.splice(slot-1, 1)
+        }
+        else {
+            throw new Error("Your bag has not that many spaces, there is no item you can destroy")
+        }
 
     }
 
