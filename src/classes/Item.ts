@@ -10,4 +10,8 @@ export default class Item {
         this.defenseBoost = defenseBoost;
         this.skillLevelBoost = skillLevelBoost;
     }
+
+    get getDescription() {
+        return this.description;
+    }
 }
