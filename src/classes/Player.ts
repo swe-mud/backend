@@ -30,7 +30,7 @@ export default class Player {
     }
 
     destoryItemInInventory(slot: number): void{
-
+        this.playerInventory.destroyItem(slot);
     }
 
     attack(enemy: NonPlayerCharacter): void {
