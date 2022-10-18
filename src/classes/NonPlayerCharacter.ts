@@ -11,8 +11,11 @@ export default class NonPlayerCharacter {
         this.defenseLevel = defenseLevel;
     }
 
-    changeHealth(damage: number): void {
-
+    decreaseHealth(damage: number): void {
+        this.health -= damage;
+        if (this.health <= 0) {
+            this.health = 0;
+            this.isDead = true;
+        }
     }
-
 }
