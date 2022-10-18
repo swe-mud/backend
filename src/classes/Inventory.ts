@@ -33,7 +33,7 @@ export default class Inventory {
         else {
             throw new Error("Your bag has not that many spaces, there is no item you can destroy")
         }
-
+        
     }
 
 }

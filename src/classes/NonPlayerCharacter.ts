@@ -18,4 +18,12 @@ export default class NonPlayerCharacter {
             this.isDead = true;
         }
     }
+
+    get getDefenseLevel() {
+        return this.defenseLevel;
+    }
+
+    get isAlive() {
+        return !this.isDead;
+    }
 }
