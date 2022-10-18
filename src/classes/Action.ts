@@ -1,18 +1,18 @@
-class Action {
-    _action: string;
-    _prequisite: boolean;
-    _consequence: string;
-    constructor(action: string, consequence: string, prequisite: boolean) {
-        this._action = action;
-        this._prequisite = prequisite;
-        this._consequence = consequence;
+export default class Action {
+    action: string;
+    consequence: string;
+    internalCommands: string[];
+    constructor(action: string, consequence: string) {
+        this.action = action;
+        this.consequence = consequence;
 
     }
-    get action() {
-        return this._action;  
+    
+    get getAction() {
+        return this.action;  
     } 
-    get
-    get consequence() {
-        return this._consequence;
+
+    get getConsequence() {
+        return this.consequence;
     }
 }
