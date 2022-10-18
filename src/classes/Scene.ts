@@ -11,4 +11,8 @@ export default class Scene {
         this.professor = professor;
         this.actions = actions;
     }
+
+    get getDescription() {
+        return this.description;
+    }
 }
