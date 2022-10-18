@@ -21,8 +21,8 @@ export default class Player {
         this.defenseLevel = 10;
     }
 
-    equipItem(): void {
-
+    equipItem(equipmentSlot: Item, inventorySlot: number): void {
+        equipmentSlot = this.playerInventory.extractItem(inventorySlot);
     }
 
     addItemToInventory(item: Item): void {
