@@ -19,16 +19,26 @@ export default class Player {
         this.health = 10;
         this.skillLevel = 2;
         this.defenseLevel = 10;
+        this.equipmentLeftHand = new Item("empty", 0, 0, 0);
+        this.equipmentRightHand = new Item("empty", 0, 0, 0);
+        this.equipmentHat = new Item("empty", 0, 0, 0);
+
     }
 
     equipItem(equipmentSlot: Item, inventorySlot: number): void {
-        equipmentSlot = this.playerInventory.extractItem(inventorySlot);
+        if (equipmentSlot.getDescription == "empty" ) {
+            equipmentSlot = this.playerInventory.extractItem(inventorySlot);
+        }
+        else {
+            this.playerInventory.addItem(equipmentSlot);
+            equipmentSlot = this.playerInventory.extractItem(inventorySlot);
+        }
     }
 
     addItemToInventory(item: Item): void {
         this.playerInventory.addItem(item);
     }
-
+    
     destoryItemInInventory(slot: number): void{
         this.playerInventory.destroyItem(slot);
     }
