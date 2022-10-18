@@ -26,4 +26,8 @@ export default class NonPlayerCharacter {
     get isAlive() {
         return !this.isDead;
     }
+
+    get getDescription() {
+        return this.description;
+    }
 }
