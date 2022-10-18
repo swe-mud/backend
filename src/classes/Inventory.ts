@@ -6,13 +6,28 @@ export default class Inventory {
 
     constructor() {
         this.slots = 5;
+        this.items = [];
     }
 
-    addItem(item: Item): void{
+    listInventory(): Item[] {
+        return this.items;
+    }
 
+    addItem(item: Item): void {
+        if (this.items.length <= 5) {
+            this.items.push(item)
+        }
+        else {
+            throw new Error("Inventory is full!")
+        }
     } 
 
-    extractItem(slot: number): Item{
+    extractItem(slot: number): Item {
         return this.items[slot];
     } 
+
+    destroyItem(slot: number): void {
+
+    }
+
 }
