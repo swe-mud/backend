@@ -16,10 +16,10 @@ app.listen();
 const WebSocketServer = require('ws');
 
 // Creating a new websocket server
-const wss = new WebSocketServer.Server({ port: 3456 });
-
+export const websocketServer = new WebSocketServer.Server({ port: 3456 });
+console.log('WSS Started');
 // Creating connection using websocket
-wss.on('connection', ws => {
+websocketServer.on('connection', ws => {
   console.log('(WS) new client connected');
   // sending message
   ws.on('message', data => {
@@ -34,3 +34,14 @@ wss.on('connection', ws => {
     console.log('(WSS) Some Error occurred');
   };
 });
+
+/**
+ * Sends messages to all clients (only 1, bc single player game)
+ * @param data not stringified data
+ */
+export function sendToWsClient(data) {
+  const stringifyedData = JSON.stringify(data);
+  websocketServer.clients.forEach(function each(client) {
+    client.send(stringifyedData);
+  });
+}
