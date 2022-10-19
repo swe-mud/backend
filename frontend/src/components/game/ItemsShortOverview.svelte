@@ -2,7 +2,7 @@
   export let items = [];
 </script>
 
-<div class="card">
+<div class="card mb-4">
   <div class="card-header bg-primary">Items</div>
     <ul class="list-group list-group-flush">
       {#if items.length !== 0}

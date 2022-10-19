@@ -26,6 +26,13 @@
   <div class="row">
     <div class="col-3">
       <ItemsShortOverview items="{ items }" />
+
+      <div class="card">
+        <div class="card-header bg-primary">Du bist im Raum</div>
+        <div class="card-body p-0">
+          <img src="https://cdn.discordapp.com/attachments/1014429749306728458/1022126551229276230/20220921_144443.jpg" class="img-fluid" />
+        </div>
+      </div>
     </div>
     <div class="col-9">
       <div class="card">
@@ -52,7 +59,7 @@
           </details>
 
           <div class="input-group">
-            <input type="text" bind:value={message} class="form-control" placeholder="Deine Eingabe" aria-label="Deine Eingabe" aria-describedby="button-submit">
+            <input type="text" bind:value={message} class="form-control" placeholder="Deine Eingabe" aria-label="Deine Eingabe" aria-describedby="button-submit" required>
             <button class="btn btn-info" type="button" id="button-submit" on:click={sendMessage}>Senden</button>
           </div>
         </div>
