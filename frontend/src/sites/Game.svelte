@@ -11,7 +11,7 @@
 
   const ws = new WebSocket("ws://localhost:16816");
   let items = [];
-  let msg = [];
+  let messages = [];
 
   onMount(() => {
     ws.addEventListener("open", () =>{
@@ -32,12 +32,12 @@
   function handleWebsocketServerMessage(emittedEvent) {
     console.info("WSS-ownEvent", emittedEvent);
     if (emittedEvent.type === "message") {
-      processIncomingMessage()
+      processIncomingMessage(emittedEvent.message)
     }
   }
 
   function processIncomingMessage(message) {
-    msg = [...msg, message];
+    messages = [...messages, message];
     scrollToLastMessageInTerminal();
   }
 
@@ -69,11 +69,11 @@
 
         <div class="card-body" style="max-height: 500px; overflow: auto" id="terminalmsgs">
           <ul class="list-group">
-            {#each msg as m}
-              <UserMessage />
-
-              {#if m % 2}
-                <CommentMessage text="Das ist ein Kommentar. Was willst du tun?" />
+            {#each messages as message}
+              {#if message.isComment}
+                <CommentMessage text="{message.content}" />
+              {:else}
+                <UserMessage name="{message.author}" text="{message.content}"  />
               {/if}
             {/each}
           </ul>
