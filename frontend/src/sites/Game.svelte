@@ -90,8 +90,8 @@
 
         <div class="card-footer bg-secondary">
           <details class="mb-2">
-            <summary>Befehle/Info</summary>
-            Folgt
+            <summary>Help</summary>
+            Hab Spaß!
           </details>
 
           {#if $isInteractionModeEnabled}
