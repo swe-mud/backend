@@ -30,13 +30,13 @@ export default class Player {
             equipmentSlot = this.playerInventory.extractItem(inventorySlot);
         }
         else {
-            this.playerInventory.addItem(equipmentSlot);
+            this.playerInventory.addItem(equipmentSlot, inventorySlot);
             equipmentSlot = this.playerInventory.extractItem(inventorySlot);
         }
     }
 
-    addItemToInventory(item: Item): void {
-        this.playerInventory.addItem(item);
+    addItemToInventory(item: Item, inventorySlot: number): void {
+        this.playerInventory.addItem(item, inventorySlot);
     }
     
     destoryItemInInventory(slot: number): void{
