@@ -19,10 +19,10 @@
 
     ws.addEventListener('message', function (event) {
       console.info("WSSevent-raw", event, JSON.parse(event.data));
-      const emitedData = JSON.parse(event.data);
+      const emittedData = JSON.parse(event.data);
 
-      if (emitedData !== undefined) {
-        handleWebsocketServerMessage(emitedData);
+      if (emittedData !== undefined) {
+        handleWebsocketServerMessage(emittedData);
       }
     });
   });
