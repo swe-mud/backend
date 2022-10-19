@@ -1,7 +1,7 @@
 <script>
-  export let player;
+  import {player} from "../../store/login";
 
-  let playername = player?.name ?? "Hexer";
+  let playername = $player?.name ?? "Hexer";
   let avatarUrl = `https://avatars.dicebear.com/api/adventurer/${playername}.svg`;
 </script>
 
