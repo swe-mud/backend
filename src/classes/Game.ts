@@ -26,19 +26,19 @@ export default class Game {
         this.isGameOver = false;
         this.player = null;
         this.inventory = null;
-        this.sceneWakeUp;
-        this.sceneTheGroup;
-        this.sceneEquipLaptop;
+        this.sceneWakeUp();
+        this.sceneTheGroup();
+        this.sceneEquipLaptop();
     }
 
     handleEvent(event: string): void {
         if (event == "sceneWakeUp_where_am_I") {
             let sceneWakeUp_whereAmIMessage1: Message = new Message("Student neben dir", "Alles Ok? Du siehst verwirrt aus?");
             sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage1 });
-            let sceneWakeUp_whereAmIMessage2: Message = new Message("Prof", `„Haben Sie gerade gesagt Sie wissen nicht wo Sie sind? 
+            let sceneWakeUp_whereAmIMessage2: Message = new Message("Prof", `„Haben Sie gerade gesagt Sie wissen nicht wo Sie sind?
                                                                  Ich glaube Sie brauchen Hilfe. Ruft einen Krankenwagen!“`);
             sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage2 });
-            let sceneWakeUp_whereAmIMessage3: Message = new Message(null, `Der Krankenwagen holt dich ab und bringt dich ins Krankenhaus, 
+            let sceneWakeUp_whereAmIMessage3: Message = new Message(null, `Der Krankenwagen holt dich ab und bringt dich ins Krankenhaus,
                                                                 um dich zu untersuchen. Die verpasste Zeit schaffst du niemals nachzuholen.`, true);
             sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage3 });
             this.isGameOver = true;
@@ -50,8 +50,8 @@ export default class Game {
                                                             aber irgendwie kannst du auch nicht einfach gehen. Irgendetwas fesselt dich hier.
                                                             Der Prof beginnt Zettel mit Gruppennamen auszuteilen`, true);
             sendToWsClient({ type: 'message', message: sceneWakeUp_sayNothingMessage1 });
-        } 
-        
+        }
+
         if (event == "sceneTheGroup_hello_group_A") {
             let sceneTheGroup_helloGroupAMessage1: Message = new Message(null, "alle schauen dich leicht verwirrt an");
             sendToWsClient({ type: 'message', message: sceneTheGroup_helloGroupAMessage1 });
@@ -80,7 +80,7 @@ export default class Game {
 
     sceneWakeUp(): void {
         // client
-        let sceneDescription: string =  `Du wachst plötzlich auf und stellst überrascht fest, 
+        let sceneDescription: string =  `Du wachst plötzlich auf und stellst überrascht fest,
                                         dass du dich in einem Raum voller Student:innen und einem Professor
                                         befindest`;
         let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
