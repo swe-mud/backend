@@ -38,6 +38,10 @@
     if (emittedEvent.type === "interaction") {
       processIncomingInteractions(emittedEvent.choices.interactions)
     }
+
+    if (emittedEvent.type === "gameover") {
+      $player.game_over = true;
+    }
   }
 
   function processIncomingMessage(message) {

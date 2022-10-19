@@ -43,6 +43,9 @@ export default class Game {
       );
       sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage3 });
       this.isGameOver = true;
+      setTimeout(() => {
+        sendToWsClient({ type: 'gameover' });
+      }, 9000);
     }
 
     if (event == 'sceneWakeUp_say_nothing') {
