@@ -5,6 +5,7 @@
   import UserMessage from "../components/game/terminal/UserMessage.svelte";
   import CommentMessage from "../components/game/terminal/CommentMessage.svelte";
   import PlayerStats from "../components/game/PlayerStats.svelte";
+  import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
 
 
   let items = [];
@@ -61,10 +62,7 @@
             Folgt
           </details>
 
-          <div class="input-group">
-            <input type="text" bind:value={message} class="form-control" placeholder="Deine Eingabe" aria-label="Deine Eingabe" aria-describedby="button-submit" required>
-            <button class="btn btn-info" type="button" id="button-submit" on:click={sendMessage}>Senden</button>
-          </div>
+          <InteractionArea />
         </div>
       </div>
     </div>
