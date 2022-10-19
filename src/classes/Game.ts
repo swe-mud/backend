@@ -21,6 +21,12 @@ export default class Game {
         this.inventory = new Inventory();
     }
 
+    reset(): void {
+        this.isGameOver = false;
+        this.player = null;
+        this.inventory = null;
+    }
+
     handleEvent(event: string): void {
         if (event == "sceneWakeUp_where_am_I") {
             let sceneWakeUp_whereAmIMessage1: Message = new Message("Student neben dir", "Alles Ok? Du siehst verwirrt aus?");
