@@ -5,6 +5,7 @@ import Item from "./Item";
 import Message from "./Message";
 import NonPlayerCharacter from "./NonPlayerCharacter";
 import Player from "./Player";
+import { sendToWsClient } from "@/server";
 
 export default class Game {
     player: Player;
@@ -30,10 +31,13 @@ export default class Game {
     handleEvent(event: string): void {
         if (event == "sceneWakeUp_where_am_I") {
             let sceneWakeUp_whereAmIMessage1: Message = new Message("Student neben dir", "Alles Ok? Du siehst verwirrt aus?");
+            sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage1 });
             let sceneWakeUp_whereAmIMessage2: Message = new Message("Prof", `„Haben Sie gerade gesagt Sie wissen nicht wo Sie sind? 
                                                                  Ich glaube Sie brauchen Hilfe. Ruft einen Krankenwagen!“`);
+            sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage2 });
             let sceneWakeUp_whereAmIMessage3: Message = new Message(null, `Der Krankenwagen holt dich ab und bringt dich ins Krankenhaus, 
                                                                 um dich zu untersuchen. Die verpasste Zeit schaffst du niemals nachzuholen.`, true);
+            sendToWsClient({ type: 'message', message: sceneWakeUp_whereAmIMessage3 });
             this.isGameOver = true;
         }
 
@@ -42,15 +46,18 @@ export default class Game {
                                                             für ein duales Studium der Informatik gelandet. Du hast zwar keine Ahnung warum du hier bist,
                                                             aber irgendwie kannst du auch nicht einfach gehen. Irgendetwas fesselt dich hier.
                                                             Der Prof beginnt Zettel mit Gruppennamen auszuteilen`, true);
+            sendToWsClient({ type: 'message', message: sceneWakeUp_sayNothingMessage1 });
         } 
         
         if (event == "sceneTheGroup_hello_group_A") {
             let sceneTheGroup_helloGroupAMessage1: Message = new Message(null, "alle schauen dich leicht verwirrt an");
+            sendToWsClient({ type: 'message', message: sceneTheGroup_helloGroupAMessage1 });
         }
 
         if (event == "sceneTheGroup_say_nothing") {
             let sceneTheGroup_sayNothingAMessage1: Message = new Message("Studentin aus deiner Gruppe", `„Hey ${this.player.getName} du sollst deinen Laptop
                                                                         benutzen, ohne hast du wohl kaum eine Chance.“`);
+            sendToWsClient({ type: 'message', message: sceneTheGroup_sayNothingAMessage1 });
         }
 
         if (event == "sceneEquipLaptop_equip_laptop") {
@@ -58,10 +65,13 @@ export default class Game {
             this.inventory.addItem(laptop, 1);
             this.player.equipItem(this.player.equipmentLeftHand, 1);
             this.inventory.destroyItem(1);
+            let sceneEquipLaptop_equipLaptopMessage: Message = new Message(null, "Du equipst deinen Laptop", true);
+            sendToWsClient({ type: 'message', message: sceneEquipLaptop_equipLaptopMessage });
         }
 
         if (event == "sceneEquipLaptop_no_need") {
             let sceneEquipLaptop_noNeedMessage1: Message = new Message(this.player.name, "Im Mittelalter haben Studierende sowas auch nicht gebraucht")
+            sendToWsClient({ type: 'message', message: sceneEquipLaptop_noNeedMessage1 });
         }
     }
 
