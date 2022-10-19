@@ -1,15 +1,14 @@
 <script>
   import Login from "./sites/Login.svelte";
   import Game from "./sites/Game.svelte";
-
-  let isLoggedIn = Boolean(new URLSearchParams(window.location.search).get("login"));
+  import { isLoggedIn as isLoggedInStore, player } from "./store/login";
 </script>
 
-{#if !isLoggedIn}
+{#if !$isLoggedInStore}
   <Login />
 {/if}
 
-{#if isLoggedIn}
+{#if $isLoggedInStore}
   <Game />
 {/if}
 

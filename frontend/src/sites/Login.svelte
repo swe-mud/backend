@@ -1,12 +1,15 @@
 <script>
   import Logo from "../components/Logo.svelte";
+  import {player, isLoggedIn} from "../store/login";
 
   let name = "";
   let studentId = "";
 
   function validateInput() {
     if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {
-
+      $player.name = name;
+      $player.studentId = studentId;
+      $isLoggedIn = true;
     } else {
       alert("Name und Matrikelnummer angeben!")
     }
