@@ -1,11 +1,12 @@
+import Message from "./Message";
+
 export default class Action {
     action: string;
-    consequence: string;
+    consequence: Message[];
     internalCommands: string[];
-    constructor(action: string, consequence: string) {
+    constructor(action: string, consequence: Message[]) {
         this.action = action;
         this.consequence = consequence;
-
     }
     
     get getAction() {

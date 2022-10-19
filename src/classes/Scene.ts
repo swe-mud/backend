@@ -2,7 +2,7 @@ import Action from "./Action";
 import NonPlayerCharacter from "./NonPlayerCharacter";
 
 export default class Scene {
-    description: String;
+    description: string;
     professor: NonPlayerCharacter;
     actions: Action[];
     
