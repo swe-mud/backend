@@ -2,14 +2,16 @@
   import Login from "./sites/Login.svelte";
   import Game from "./sites/Game.svelte";
 
-  let isLoggedIn = false;//Boolean(new URLSearchParams(window.location.search).get("login"));
+  let isLoggedIn = Boolean(new URLSearchParams(window.location.search).get("login"));
 </script>
 
 {#if !isLoggedIn}
   <Login />
 {/if}
 
-<Game />
+{#if isLoggedIn}
+  <Game />
+{/if}
 
 <style>
   .form-control {

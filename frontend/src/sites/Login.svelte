@@ -10,7 +10,7 @@
     } else {
       alert("Name und Matrikelnummer angeben!")
     }
-  };
+  }
 </script>
 
 <center>
