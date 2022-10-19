@@ -1,79 +1,91 @@
-import Action from "./Action";
+import Choices from "./Choices";
+import Interaction from "./Interaction";
 import Inventory from "./Inventory";
 import Item from "./Item";
 import Message from "./Message";
 import NonPlayerCharacter from "./NonPlayerCharacter";
 import Player from "./Player";
-import Scene from "./Scene";
 
 class Game {
     startText: string;
-    scenes: Scene[];
     player: Player;
     npcs: NonPlayerCharacter[];
-    actions: Action[];
     inventory: Inventory;
     items: Item[];
     isGameOver: boolean;
 
-    constructor(playerName: string, studentId: number, ) {
+    constructor(playerName: string, studentId: number) {
         this.isGameOver = false;
         this.player = new Player(playerName, studentId);
+        this.inventory = new Inventory();
     }
 
-    run(): void {
-        
-    }
+    handleEvent(event: string): void {
+        if (event == "sceneWakeUp_where_am_I") {
+            let sceneWakeUp_whereAmIMessage1: Message = new Message("Student neben dir", "Alles Ok? Du siehst verwirrt aus?");
+            let sceneWakeUp_whereAmIMessage2: Message = new Message("Prof", `„Haben Sie gerade gesagt Sie wissen nicht wo Sie sind? 
+                                                                 Ich glaube Sie brauchen Hilfe. Ruft einen Krankenwagen!“`);
+            let sceneWakeUp_whereAmIMessage3: Message = new Message(null, `Der Krankenwagen holt dich ab und bringt dich ins Krankenhaus, 
+                                                                um dich zu untersuchen. Die verpasste Zeit schaffst du niemals nachzuholen.`, true);
+            this.isGameOver = true;
+        }
 
-    sentMessage(): void {
-        
-    }
-
-    sceneOne(): void {
-        let sceneOneDescription: string = `Du wachst plötzlich auf und stellst überrascht fest, 
-                                             dass du dich in einem Raum voller Student:innen und einem Professor
-                                             befindest`;
-        // "Du wachst plötzlich auf..."
-        let descriptionSceneOne: Message = new Message(null , sceneOneDescription, true);
-        
-        // Compose first choice and consequences
-        let sceneOneChoiceA: string = "Wo zur Hölle bin ich?";
-        let sceneOneDialogeA1: Message = new Message("Student neben dir", "Alles Ok? Du siehst verwirrt aus?");
-        let sceneOneDialogeA2: Message = new Message("Prof", `„Haben Sie gerade gesagt Sie wissen nicht wo Sie sind? 
-                                                             Ich glaube Sie brauchen Hilfe. Ruft einen Krankenwagen!“`);
-        let sceneOneDialogeA3: Message = new Message(null, `Der Krankenwagen holt dich ab und bringt dich ins Krankenhaus, 
-                                                            um dich zu untersuchen. Die verpasste Zeit schaffst du niemals nachzuholen.`, true);
-        let sceneOneDialogeAComplete: Message[] = [sceneOneDialogeA1, sceneOneDialogeA2, sceneOneDialogeA3];        
-        let sceneOneActionA: Action = new Action(sceneOneChoiceA, sceneOneDialogeAComplete);
-        // "Wo zur Hölle bin ich?"
-        let choiceASceneOne: Message = new Message(this.player.getName, sceneOneActionA.getAction, false, true);
-
-        // Compose second choice and consequences
-        let sceneOneChoiceB: string = "Nichts sagen";
-        let sceneOneDialogeB1: Message = new Message(null, `Du schaust dich verwirrt um. Scheinbar bist du in einer Einführungsveranstaltung
+        if (event == "sceneWakeUp_say_nothing") {
+            let sceneWakeUp_sayNothingMessage1: Message = new Message(null, `Du schaust dich verwirrt um. Scheinbar bist du in einer Einführungsveranstaltung
                                                             für ein duales Studium der Informatik gelandet. Du hast zwar keine Ahnung warum du hier bist,
                                                             aber irgendwie kannst du auch nicht einfach gehen. Irgendetwas fesselt dich hier.
                                                             Der Prof beginnt Zettel mit Gruppennamen auszuteilen`, true);
-        let sceneOneDialogeBComplete: Message[] = [sceneOneDialogeB1];
-        let sceneOneActionB: Action = new Action(sceneOneChoiceB, sceneOneDialogeBComplete);
-        // "Nichts sagen"
-        let choiceBSceneOne: Message = new Message(null, sceneOneActionB.getAction, false, true);
+        } 
         
-        // resolve sceneOne
-        // this.player.takeAction = "Wo zur Hölle bin ich" 
-        descriptionSceneOne;
-        choiceASceneOne;
-        choiceBSceneOne;
-        if (this.player.takeAction(sceneOneActionA) == sceneOneActionA.getAction) {
-            sceneOneActionA.getConsequence[0];
-            sceneOneActionA.getConsequence[1];
-            sceneOneActionA.getConsequence[2];
-            this.isGameOver = true;
+        if (event == "sceneTheGroup_hello_group_A") {
+            let sceneTheGroup_helloGroupAMessage1: Message = new Message(null, "alle schauen dich leicht verwirrt an");
         }
-        // this.player.takeAction ="Nichts sagen"
-        else if (this.player.takeAction(sceneOneActionB) == sceneOneActionB.getAction) {
-            sceneOneDialogeBComplete[0];
+
+        if (event == "sceneTheGroup_say_nothing") {
+            let sceneTheGroup_sayNothingAMessage1: Message = new Message("Studentin aus deiner Gruppe", `„Hey ${this.player.getName} du sollst deinen Laptop
+                                                                        benutzen, ohne hast du wohl kaum eine Chance.“`);
         }
+
+        if (event == "sceneEquipLaptop_equip_laptop") {
+            let laptop: Item = new Item("Ein alter Lenovo Ideapad mit wenig Leistung", 0, 0, 2);
+            this.inventory.addItem(laptop, 1);
+            this.player.equipItem(this.player.equipmentLeftHand, 1);
+            this.inventory.destroyItem(1);
+        }
+
+        if (event == "sceneEquipLaptop_no_need") {
+            let sceneEquipLaptop_noNeedMessage1: Message = new Message(this.player.name, "Im Mittelalter haben Studierende sowas auch nicht gebraucht")
+        }
+    }
+
+    sceneWakeUp(): void {
+        // client
+        let sceneDescription: string =  `Du wachst plötzlich auf und stellst überrascht fest, 
+                                        dass du dich in einem Raum voller Student:innen und einem Professor
+                                        befindest`;
+        let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
+        let interactionA: Interaction = new Interaction("Wo zur Hölle bin ich", "sceneWakeUp_where_am_I");
+        let interactionB: Interaction = new Interaction("Nichts sagen", "sceneWakeUp_say_nothing");
+        let choicesSceneWakeUp: Choices = new Choices([interactionA, interactionB]);
+    }
+
+    sceneTheGroup(): void {
+        //client
+        let sceneDescription: string = `Prof gibt dir einen Zettel auf dem "Gruppe A steht und geht weiter. Vier Student:innen
+                                        schauen dich an, lächeln und zeigen dir, dass Sie den gleichen Zettel bekommen haben.`
+        let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
+        let interactionA: Interaction = new Interaction("Also Gruppe A", "sceneTheGroup_hello_group_A");
+        let interactionB: Interaction = new Interaction("Nichts Sagen", "sceneTheGroup_say_nothing");
+        let choicesSceneTheGroup: Choices = new Choices([interactionA, interactionB]);
+    }
+
+    sceneEquipLaptop(): void {
+        //client
+        let sceneDescription: string = `Die Studentin zeigt auf deinen alten Laptop`;
+        let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
+        let interactionA: Interaction = new Interaction("Klar gute Idee", "sceneEquipLaptop_equip_laptop");
+        let interactionB: Interaction = new Interaction("Sowas brauch ich nicht", "sceneEquipLaptop_no_need");
+        let choicesSceneEquipLaptop: Choices = new Choices([interactionA, interactionB]);
     }
 }
 
