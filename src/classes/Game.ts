@@ -6,15 +6,16 @@ import Message from "./Message";
 import NonPlayerCharacter from "./NonPlayerCharacter";
 import Player from "./Player";
 
-class Game {
+export default class Game {
     startText: string;
     player: Player;
-    npcs: NonPlayerCharacter[];
     inventory: Inventory;
-    items: Item[];
     isGameOver: boolean;
 
-    constructor(playerName: string, studentId: number) {
+    constructor() {
+    }
+
+    start(playerName: string, studentId: number) {
         this.isGameOver = false;
         this.player = new Player(playerName, studentId);
         this.inventory = new Inventory();
@@ -88,5 +89,7 @@ class Game {
         let choicesSceneEquipLaptop: Choices = new Choices([interactionA, interactionB]);
     }
 }
+
+export let game: Game = new Game();
 
 
