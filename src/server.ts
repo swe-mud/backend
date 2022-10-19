@@ -25,7 +25,7 @@ websocketServer.on('connection', ws => {
   ws.on('message', data => {
     console.log(`(WS) Client has sent us: ${data}`);
   });
-  // handling what to do when clients disconnects from server
+  // handling what to do when clients disconnect from server
   ws.on('close', () => {
     console.log('(WS) the client has connected');
   });

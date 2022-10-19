@@ -1,25 +1,38 @@
 <script>
+  import Logo from "../components/Logo.svelte";
+
   let name = "";
   let studentId = "";
 
   function validateInput() {
-    if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {} else {
+    if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {
+
+    } else {
       alert("Name und Matrikelnummer angeben!")
     }
-  };
+  }
 </script>
 
 <center>
   <main class="m-auto">
-    <img class="img-fluid mt-4 mb-5" src="https://cdn.discordapp.com/attachments/1014430212320133170/1030172968376094770/hwrmudgamelogo-klein.png" />
+    <Logo displayBigLogo="false" />
 
     <button class="btn mb-5 btn-success d-block" on:click={ validateInput }>
       Start game
     </button>
 
-    <div class="p-2 mt-3 rounded-3 mb-3" style="max-width: 50%; background-color: darkgrey; color: black">
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-      sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea tak
+    <div class="p-2 mt-3 rounded-3 mb-3 text-start" style="max-width: 50%; background-color: darkgrey; color: black">
+      Hast du Bock ein duales Studium der Informatik an der HWR Berlin zu absolvieren? Nein? Wir auch nicht.
+      <br>
+      Wenn du aber stattdessen Lust hast, dich durch Dungeons zu kämpfen, Professor:innen zu besiegen und deine Skills
+      zu verbessern, dann gib jetzt deine Matrikelnummer und deinen Namen ein und leg los!
+      <br><br>
+      <details>
+        <summary>Erklärung des Spiels</summary>
+        Dieses Spiel ist rein textuell. Du bekommst als Spieler Text ausgegeben, in welchem die Story
+        erzählt wird und du Handlungsmöglichkeiten vorgeschlagen bekommst. Bitte lese Aufmerksam und folge den Anweisungen
+        für ein maximales Spielerlebnis.
+      </details>
     </div>
 
     <div class="d-flex justify-content-between" style="max-width: 50%">
