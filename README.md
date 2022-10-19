@@ -6,8 +6,28 @@ To run the code, please install the newest `node js`, `sqlite` and `typescript t
 
   ## Run the code
   1. clone the repository
-  2. navigate to the directory and run `npm install`
-  3. run `npm run dev`
+  2. navigate to the directory and also to the subdirectory `frontend` and run `npm install`
+  3. add a file with the name `.env.development.local` to the root directory of this project folder; the field should contain the following content:
+   
+    # PORT
+    PORT = 15517
+
+    # DATABASE
+    DB_HOST = localhost
+    DB_PORT = 27017
+    DB_DATABASE = dev
+
+    # TOKEN
+    SECRET_KEY = secretKey
+
+    # LOG
+    LOG_FORMAT = dev
+    LOG_DIR = ../logs
+
+    # CORS
+    ORIGIN = *
+    CREDENTIALS = true
+  4. run `npm run dev`
   Have fun.
 
 # Project structure
