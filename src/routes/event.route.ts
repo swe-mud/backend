@@ -1,6 +1,6 @@
 import { Routes } from '@interfaces/routes.interface';
 import { Router } from 'express';
-import EventController from "@controllers/event.controller";
+import EventController from '@controllers/event.controller';
 
 class EventRoute implements Routes {
   public path = '/eventhandler';

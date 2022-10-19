@@ -10,7 +10,7 @@
 
   const ws = new WebSocket("ws://localhost:16816");
   let items = [];
-  let msg = [...Array(300).keys()];
+  let msg = [];
 
   onMount(() => {
     ws.addEventListener("open", () =>{
@@ -18,15 +18,24 @@
     });
 
     ws.addEventListener('message', function (event) {
-      console.log("WSSevent", event, JSON.parse(event.data));
+      console.info("WSSevent-raw", event, JSON.parse(event.data));
+      const emitedData = JSON.parse(event.data);
+
+      if (emitedData !== undefined) {
+        handleWebsocketServerMessage(emitedData);
+      }
     });
   });
 
-  function handleWebsocketServerMessage(messageObject) {
-
+  function handleWebsocketServerMessage(emittedEvent) {
+    console.info("WSS-ownEvent", emittedEvent);
+    if (emittedEvent.type === "message") {
+      processIncomingMessage()
+    }
   }
 
-  function sendMessage() {
+  function processIncomingMessage(message) {
+    msg = [...msg, message];
     scrollToLastMessageInTerminal();
   }
 
