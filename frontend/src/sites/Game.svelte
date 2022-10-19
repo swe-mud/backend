@@ -31,7 +31,7 @@
       <div class="card mb-4">
         <div class="card-header bg-primary">Du bist im Raum</div>
         <div class="card-body p-0">
-          <img src="https://cdn.discordapp.com/attachments/1014429749306728458/1022126551229276230/20220921_144443.jpg" class="img-fluid" />
+          <img src="https://cdn.discordapp.com/attachments/1014429749306728458/1032303718080724993/208EED0B-6780-42CA-A960-DEA040A354AA.jpg" class="img-fluid" />
         </div>
       </div>
 

@@ -12,10 +12,11 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"> {playername} </h5>
+        <h5 class="card-title">Stats von {playername}</h5>
         <p class="card-text">
-          <i class="bi bi-arrow-through-heart-fill"></i>
-          This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <i class="bi bi-heart-pulse-fill"></i> 100/100
+          
+        </p>
       </div>
     </div>
   </div>
