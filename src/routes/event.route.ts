@@ -13,6 +13,7 @@ class EventRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/:event`, this.eventController.index);
+    this.router.get(`${this.path}/login/:name/:studentId`, this.eventController.startGame);
   }
 }
 
