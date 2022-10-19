@@ -17,8 +17,9 @@ class EventController {
     try {
       const name = request.params.name;
       const studentId = request.params.studentId;
+
       game.start(name, Number(studentId));
-      console.log({ name, studentId });
+
       response.status(200).json({ name, studentId });
     } catch (error) {
       next(error);
