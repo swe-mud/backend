@@ -10,9 +10,7 @@
     if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {
       $player.name = name;
       $player.studentId = studentId;
-      axios("http://localhost:15517/eventhandler/login/" + name + "/" + studentId).then(res => {
-        $isLoggedIn = true;
-      })
+      $isLoggedIn = true;
     } else {
       alert("Name und Matrikelnummer angeben!")
     }

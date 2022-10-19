@@ -11,7 +11,7 @@ export default class Player {
     equipmentLeftHand: Item;
     equipmentRightHand: Item;
     equipmentHat: Item;
-    playerInventory: Inventory;
+    inventory: Inventory;
 
     constructor(name: string, studentId: number) {
         this.name = name;
@@ -22,6 +22,7 @@ export default class Player {
         this.health = 10;
         this.skillLevel = 2 + this.equipmentHat.skillLevelBoost, this.equipmentLeftHand.skillLevelBoost + this.equipmentRightHand.skillLevelBoost;
         this.defenseLevel = 10;
+        this.inventory = new Inventory();
 
     }
     get getName() {
@@ -30,20 +31,20 @@ export default class Player {
 
     equipItem(equipmentSlot: Item, inventorySlot: number): void {
         if (equipmentSlot.getDescription == "empty" ) {
-            equipmentSlot = this.playerInventory.extractItem(inventorySlot);
+            equipmentSlot = this.inventory.extractItem(inventorySlot);
         }
         else {
-            this.playerInventory.addItem(equipmentSlot, inventorySlot);
-            equipmentSlot = this.playerInventory.extractItem(inventorySlot);
+            this.inventory.addItem(equipmentSlot, inventorySlot);
+            equipmentSlot = this.inventory.extractItem(inventorySlot);
         }
     }
 
     addItemToInventory(item: Item, inventorySlot: number): void {
-        this.playerInventory.addItem(item, inventorySlot);
+        this.inventory.addItem(item, inventorySlot);
     }
     
     destoryItemInInventory(slot: number): void{
-        this.playerInventory.destroyItem(slot);
+        this.inventory.destroyItem(slot);
     }
 
     attack(enemy: NonPlayerCharacter): void {

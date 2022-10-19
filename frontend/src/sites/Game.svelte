@@ -4,30 +4,54 @@
   import CommentMessage from "../components/game/terminal/CommentMessage.svelte";
   import PlayerStats from "../components/game/PlayerStats.svelte";
   import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
-  import {isInteractionModeEnabled} from "../store/interactions";
+  import {interactions, isInteractionModeEnabled} from "../store/interactions";
   import {onMount} from "svelte";
-  import {player} from "../store/login";
+  import {isLoggedIn, player} from "../store/login";
+  import axios from "axios";
 
   const ws = new WebSocket("ws://localhost:16816");
   let items = [];
-  let msg = [...Array(300).keys()];
+  let messages = [];
 
   onMount(() => {
     ws.addEventListener("open", () =>{
       console.log("WSS - Connected :-)");
+      axios("http://localhost:15517/eventhandler/login/" + $player.name + "/" + $player.studentId).then(res => {})
     });
 
     ws.addEventListener('message', function (event) {
-      console.log("WSSevent", event, JSON.parse(event.data));
+      console.info("WSSevent-raw", event, JSON.parse(event.data));
+      const emittedData = JSON.parse(event.data);
+
+      if (emittedData !== undefined) {
+        handleWebsocketServerMessage(emittedData);
+      }
     });
   });
 
-  function handleWebsocketServerMessage(messageObject) {
+  function handleWebsocketServerMessage(emittedEvent) {
+    console.info("WSS-ownEvent", emittedEvent);
+    if (emittedEvent.type === "message") {
+      processIncomingMessage(emittedEvent.message)
+    }
 
+    if (emittedEvent.type === "interaction") {
+      processIncomingInteractions(emittedEvent.choices.interactions)
+    }
+
+    if (emittedEvent.type === "gameover") {
+      $player.game_over = true;
+    }
   }
 
-  function sendMessage() {
+  function processIncomingMessage(message) {
+    messages = [...messages, message];
     scrollToLastMessageInTerminal();
+  }
+
+  function processIncomingInteractions(incomingInteractions) {
+    $interactions = incomingInteractions;
+    $isInteractionModeEnabled = true;
   }
 
   function scrollToLastMessageInTerminal() {
@@ -58,11 +82,11 @@
 
         <div class="card-body" style="max-height: 500px; overflow: auto" id="terminalmsgs">
           <ul class="list-group">
-            {#each msg as m}
-              <UserMessage />
-
-              {#if m % 2}
-                <CommentMessage text="Das ist ein Kommentar. Was willst du tun?" />
+            {#each messages as message}
+              {#if message.isComment}
+                <CommentMessage text="{message.content}" />
+              {:else}
+                <UserMessage name="{message.author}" text="{message.content}"  />
               {/if}
             {/each}
           </ul>
@@ -70,8 +94,8 @@
 
         <div class="card-footer bg-secondary">
           <details class="mb-2">
-            <summary>Befehle/Info</summary>
-            Folgt
+            <summary>Help</summary>
+            Hab Spaß!
           </details>
 
           {#if $isInteractionModeEnabled}
