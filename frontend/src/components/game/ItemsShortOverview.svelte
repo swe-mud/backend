@@ -3,7 +3,7 @@
 </script>
 
 <div class="card">
-  <div class="card-header">Items</div>
+  <div class="card-header bg-primary">Items</div>
     <ul class="list-group list-group-flush">
       {#if items.length !== 0}
           {#each items as item (item)}
