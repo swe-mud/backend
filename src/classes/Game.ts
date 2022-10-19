@@ -26,6 +26,9 @@ export default class Game {
         this.isGameOver = false;
         this.player = null;
         this.inventory = null;
+        this.sceneWakeUp;
+        this.sceneTheGroup;
+        this.sceneEquipLaptop;
     }
 
     handleEvent(event: string): void {
@@ -81,6 +84,7 @@ export default class Game {
                                         dass du dich in einem Raum voller Student:innen und einem Professor
                                         befindest`;
         let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
+        sendToWsClient({ type: 'message', message: sceneDescriptionMessage });
         let interactionA: Interaction = new Interaction("Wo zur Hölle bin ich", "sceneWakeUp_where_am_I");
         let interactionB: Interaction = new Interaction("Nichts sagen", "sceneWakeUp_say_nothing");
         let choicesSceneWakeUp: Choices = new Choices([interactionA, interactionB]);
@@ -91,6 +95,7 @@ export default class Game {
         let sceneDescription: string = `Prof gibt dir einen Zettel auf dem "Gruppe A steht und geht weiter. Vier Student:innen
                                         schauen dich an, lächeln und zeigen dir, dass Sie den gleichen Zettel bekommen haben.`
         let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
+        sendToWsClient({ type: 'message', message: sceneDescriptionMessage });
         let interactionA: Interaction = new Interaction("Also Gruppe A", "sceneTheGroup_hello_group_A");
         let interactionB: Interaction = new Interaction("Nichts Sagen", "sceneTheGroup_say_nothing");
         let choicesSceneTheGroup: Choices = new Choices([interactionA, interactionB]);
@@ -100,6 +105,7 @@ export default class Game {
         //client
         let sceneDescription: string = `Die Studentin zeigt auf deinen alten Laptop`;
         let sceneDescriptionMessage: Message = new Message(null, sceneDescription, true);
+        sendToWsClient({ type: 'message', message: sceneDescriptionMessage });
         let interactionA: Interaction = new Interaction("Klar gute Idee", "sceneEquipLaptop_equip_laptop");
         let interactionB: Interaction = new Interaction("Sowas brauch ich nicht", "sceneEquipLaptop_no_need");
         let choicesSceneEquipLaptop: Choices = new Choices([interactionA, interactionB]);
