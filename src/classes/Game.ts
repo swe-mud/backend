@@ -7,7 +7,6 @@ import NonPlayerCharacter from "./NonPlayerCharacter";
 import Player from "./Player";
 
 export default class Game {
-    startText: string;
     player: Player;
     inventory: Inventory;
     isGameOver: boolean;
@@ -16,6 +15,7 @@ export default class Game {
     }
 
     start(playerName: string, studentId: number) {
+        this.reset();
         this.isGameOver = false;
         this.player = new Player(playerName, studentId);
         this.inventory = new Inventory();
