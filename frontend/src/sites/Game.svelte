@@ -4,7 +4,7 @@
   import CommentMessage from "../components/game/terminal/CommentMessage.svelte";
   import PlayerStats from "../components/game/PlayerStats.svelte";
   import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
-  import {isInteractionModeEnabled} from "../store/interactions";
+  import {interactions, isInteractionModeEnabled} from "../store/interactions";
   import {onMount} from "svelte";
   import {isLoggedIn, player} from "../store/login";
   import axios from "axios";
@@ -34,11 +34,20 @@
     if (emittedEvent.type === "message") {
       processIncomingMessage(emittedEvent.message)
     }
+
+    if (emittedEvent.type === "interaction") {
+      processIncomingInteractions(emittedEvent.choices.interactions)
+    }
   }
 
   function processIncomingMessage(message) {
     messages = [...messages, message];
     scrollToLastMessageInTerminal();
+  }
+
+  function processIncomingInteractions(incomingInteractions) {
+    $interactions = incomingInteractions;
+    $isInteractionModeEnabled = true;
   }
 
   function scrollToLastMessageInTerminal() {
