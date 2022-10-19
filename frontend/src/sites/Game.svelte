@@ -6,6 +6,7 @@
   import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
   import {isInteractionModeEnabled} from "../store/interactions";
   import {onMount} from "svelte";
+  import {player} from "../store/login";
 
   const ws = new WebSocket("ws://localhost:16816");
   let items = [];

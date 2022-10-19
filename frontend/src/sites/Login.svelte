@@ -1,12 +1,18 @@
 <script>
   import Logo from "../components/Logo.svelte";
+  import {player, isLoggedIn} from "../store/login";
+  import axios from "axios";
 
   let name = "";
   let studentId = "";
 
   function validateInput() {
     if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {
-
+      $player.name = name;
+      $player.studentId = studentId;
+      axios("http://localhost:15517/eventhandler/login/" + name + "/" + studentId).then(res => {
+        $isLoggedIn = true;
+      })
     } else {
       alert("Name und Matrikelnummer angeben!")
     }

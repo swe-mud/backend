@@ -7,7 +7,19 @@ class EventController {
     try {
       const event = request.params.event;
       game.handleEvent(event);
-      response.status(200).json({ disableInput: true, sent_event: event });
+      response.status(200);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public startGame = (request: Request, response: Response, next: NextFunction) => {
+    try {
+      const name = request.params.name;
+      const studentId = request.params.studentId;
+      game.start(name, Number(studentId));
+      console.log({ name, studentId });
+      response.status(200).json({ name, studentId });
     } catch (error) {
       next(error);
     }
