@@ -1,19 +1,31 @@
 <script>
-  import Div from "../components/Container.svelte";
-  import Logo from "../components/Logo.svelte";
   import ItemsShortOverview from "../components/game/ItemsShortOverview.svelte";
   import UserMessage from "../components/game/terminal/UserMessage.svelte";
   import CommentMessage from "../components/game/terminal/CommentMessage.svelte";
   import PlayerStats from "../components/game/PlayerStats.svelte";
+  import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
+  import {isInteractionModeEnabled} from "../store/interactions";
+  import {onMount} from "svelte";
 
-
+  const ws = new WebSocket("ws://localhost:16816");
   let items = [];
-  let message = "";
   let msg = [...Array(300).keys()];
 
-  function sendMessage() {
+  onMount(() => {
+    ws.addEventListener("open", () =>{
+      console.log("WSS - Connected :-)");
+    });
 
-    message = "";
+    ws.addEventListener('message', function (event) {
+      console.log("WSSevent", event, JSON.parse(event.data));
+    });
+  });
+
+  function handleWebsocketServerMessage(messageObject) {
+
+  }
+
+  function sendMessage() {
     scrollToLastMessageInTerminal();
   }
 
@@ -61,10 +73,11 @@
             Folgt
           </details>
 
-          <div class="input-group">
-            <input type="text" bind:value={message} class="form-control" placeholder="Deine Eingabe" aria-label="Deine Eingabe" aria-describedby="button-submit" required>
-            <button class="btn btn-info" type="button" id="button-submit" on:click={sendMessage}>Senden</button>
-          </div>
+          {#if $isInteractionModeEnabled}
+            <InteractionArea />
+          {:else}
+            <small class="text-white-50 d-none">Eingabe gesperrt.</small>
+          {/if}
         </div>
       </div>
     </div>
