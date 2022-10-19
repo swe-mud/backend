@@ -1,11 +1,10 @@
 <script>
-  import Div from "../components/Container.svelte";
-  import Logo from "../components/Logo.svelte";
   import ItemsShortOverview from "../components/game/ItemsShortOverview.svelte";
   import UserMessage from "../components/game/terminal/UserMessage.svelte";
   import CommentMessage from "../components/game/terminal/CommentMessage.svelte";
   import PlayerStats from "../components/game/PlayerStats.svelte";
   import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
+  import {isInteractionModeEnabled} from "../store/interactions";
 
 
   let items = [];
@@ -62,7 +61,11 @@
             Folgt
           </details>
 
-          <InteractionArea />
+          {#if $isInteractionModeEnabled}
+            <InteractionArea />
+          {:else}
+            <small class="text-white-50 d-none">Eingabe gesperrt.</small>
+          {/if}
         </div>
       </div>
     </div>

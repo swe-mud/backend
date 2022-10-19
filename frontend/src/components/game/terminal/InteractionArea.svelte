@@ -1,9 +1,10 @@
 <script>
-  import {interactions} from "../../../store/interactions";
+  import {interactions, isInteractionModeEnabled} from "../../../store/interactions";
   import axios from "axios";
 
   function sendEvent(event) {
     axios("http://localhost:15517/eventhandler/" + event);
+    $isInteractionModeEnabled = false;
   }
 </script>
 
