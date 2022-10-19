@@ -5,15 +5,27 @@
   import PlayerStats from "../components/game/PlayerStats.svelte";
   import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
   import {isInteractionModeEnabled} from "../store/interactions";
+  import {onMount} from "svelte";
 
-
+  const ws = new WebSocket("ws://localhost:16816");
   let items = [];
-  let message = "";
   let msg = [...Array(300).keys()];
 
-  function sendMessage() {
+  onMount(() => {
+    ws.addEventListener("open", () =>{
+      console.log("WSS - Connected :-)");
+    });
 
-    message = "";
+    ws.addEventListener('message', function (event) {
+      console.log("WSSevent", event, JSON.parse(event.data));
+    });
+  });
+
+  function handleWebsocketServerMessage(messageObject) {
+
+  }
+
+  function sendMessage() {
     scrollToLastMessageInTerminal();
   }
 

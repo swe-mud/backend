@@ -17,7 +17,7 @@ app.listen();
 const WebSocketServer = require('ws');
 
 // Creating a new websocket server
-export const websocketServer = new WebSocketServer.Server({ port: 3456 });
+export const websocketServer = new WebSocketServer.Server({ port: 16816 });
 console.log('WSS Started');
 // Creating connection using websocket
 websocketServer.on('connection', ws => {
