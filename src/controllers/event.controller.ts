@@ -7,7 +7,7 @@ class EventController {
     try {
       const event = request.params.event;
       game.handleEvent(event);
-      response.status(200);
+      response.status(200).json({ status: 'ok', event: event });
     } catch (error) {
       next(error);
     }

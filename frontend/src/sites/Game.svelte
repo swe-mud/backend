@@ -6,7 +6,8 @@
   import InteractionArea from "../components/game/terminal/InteractionArea.svelte";
   import {isInteractionModeEnabled} from "../store/interactions";
   import {onMount} from "svelte";
-  import {player} from "../store/login";
+  import {isLoggedIn, player} from "../store/login";
+  import axios from "axios";
 
   const ws = new WebSocket("ws://localhost:16816");
   let items = [];
@@ -15,6 +16,7 @@
   onMount(() => {
     ws.addEventListener("open", () =>{
       console.log("WSS - Connected :-)");
+      axios("http://localhost:15517/eventhandler/login/" + $player.name + "/" + $player.studentId).then(res => {})
     });
 
     ws.addEventListener('message', function (event) {
