@@ -4,11 +4,10 @@ export default class Message {
     isComment: boolean;
     isInputInfo: boolean;
     
-    constructor(author: string, content: string, isComment: boolean = false, isInputInfo: boolean = false) {
+    constructor(author: string, content: string, isComment: boolean = false) {
         this.author = author;
         this.content = content;
         this.isComment = isComment;
-        this.isInputInfo = isInputInfo;
     }
 
 
