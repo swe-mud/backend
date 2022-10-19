@@ -9,7 +9,6 @@ import { sendToWsClient } from '@/server';
 
 export default class Game {
   player: Player;
-  inventory: Inventory;
   isGameOver: boolean;
 
   constructor() {}
@@ -18,14 +17,12 @@ export default class Game {
     this.reset();
     this.isGameOver = false;
     this.player = new Player(playerName, studentId);
-    this.inventory = new Inventory();
     this.sceneWakeUp();
   }
 
   reset(): void {
     this.isGameOver = false;
     this.player = null;
-    this.inventory = null;
   }
 
   handleEvent(event: string): void {
@@ -62,8 +59,9 @@ export default class Game {
     }
 
     if (event == 'sceneTheGroup_hello_group_A') {
-      const sceneTheGroup_helloGroupAMessage1: Message = new Message(null, 'alle schauen dich leicht verwirrt an');
+      const sceneTheGroup_helloGroupAMessage1: Message = new Message(null, 'alle schauen dich leicht verwirrt an', true);
       sendToWsClient({ type: 'message', message: sceneTheGroup_helloGroupAMessage1 });
+      this.sceneEquipLaptop();
     }
 
     if (event == 'sceneTheGroup_say_nothing') {
@@ -78,9 +76,9 @@ export default class Game {
 
     if (event == 'sceneEquipLaptop_equip_laptop') {
       const laptop: Item = new Item('Ein alter Lenovo Ideapad mit wenig Leistung', 0, 0, 2);
-      this.inventory.addItem(laptop, 1);
+      this.player.inventory.addItem(laptop, 1);
       this.player.equipItem(this.player.equipmentLeftHand, 1);
-      this.inventory.destroyItem(1);
+      this.player.inventory.destroyItem(1);
       const sceneEquipLaptop_equipLaptopMessage: Message = new Message(null, 'Du equipst deinen Laptop', true);
       sendToWsClient({ type: 'message', message: sceneEquipLaptop_equipLaptopMessage });
     }

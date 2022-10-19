@@ -35,9 +35,9 @@ export default class Inventory {
     } 
 
     destroyItem(slot: number): void {
-        if (this.items.length <= slot && slot > 0) {
-            if (this.items[slot].getDescription != "empty") {
-                this.items[slot] = new Item("empty", 0, 0, 0)
+        if (slot < this.maxInventorySlots && slot > 0) {
+            if (this.items[slot-1].getDescription != "empty") {
+                this.items[slot-1] = new Item("empty", 0, 0, 0)
             }
             else {
                 throw new Error("You have no item in that slot!")
