@@ -4,6 +4,7 @@
   import ItemsShortOverview from "../components/game/ItemsShortOverview.svelte";
   import UserMessage from "../components/game/terminal/UserMessage.svelte";
   import CommentMessage from "../components/game/terminal/CommentMessage.svelte";
+  import PlayerStats from "../components/game/PlayerStats.svelte";
 
 
   let items = [];
@@ -27,12 +28,14 @@
     <div class="col-3">
       <ItemsShortOverview items="{ items }" />
 
-      <div class="card">
+      <div class="card mb-4">
         <div class="card-header bg-primary">Du bist im Raum</div>
         <div class="card-body p-0">
           <img src="https://cdn.discordapp.com/attachments/1014429749306728458/1022126551229276230/20220921_144443.jpg" class="img-fluid" />
         </div>
       </div>
+
+      <PlayerStats />
     </div>
     <div class="col-9">
       <div class="card">
