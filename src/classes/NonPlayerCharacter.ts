@@ -1,5 +1,5 @@
 export default class NonPlayerCharacter {
-    description: String;
+    description: string;
     health: number;
     defenseLevel: number;
     isDead: boolean
