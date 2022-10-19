@@ -12,7 +12,6 @@
         <h5 class="card-title">Stats von {playername}</h5>
         <p class="card-text">
           <i class="bi bi-heart-pulse-fill"></i> 100/100
-
         </p>
       </div>
     </div>

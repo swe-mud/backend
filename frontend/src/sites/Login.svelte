@@ -5,7 +5,9 @@
   let studentId = "";
 
   function validateInput() {
-    if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {} else {
+    if ((name !== "" && studentId !== "" && studentId && !isNaN(studentId))) {
+
+    } else {
       alert("Name und Matrikelnummer angeben!")
     }
   };
