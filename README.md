@@ -7,7 +7,7 @@ To run the code, please install the newest `node js`-
   ## Run the code
   1. clone the repository
   2. navigate to the directory `src/` and also to the directory `frontend/` and run `npm install`
-  3. add a file with the name `.env.development.local` to the root directory of this project folder; the field should contain the following content:
+  3. add a file with the name `.env.development.local` to the root directory of this project folder (if its not already there); the file should contain the following content:
    
     # PORT
     PORT = 15517
