@@ -2,11 +2,11 @@
 This is the backend of the mud game. It contains the api for the frontend and the application logic to control the game. We use the boilerplate construct from express and typescript.
 
 # Installation & start
-To run the code, please install the newest `node js`, `sqlite` and `typescript transpiler`.
+To run the code, please install the newest `node js`-
 
   ## Run the code
   1. clone the repository
-  2. navigate to the directory and also to the subdirectory `frontend` and run `npm install`
+  2. navigate to the directory `src/` and also to the directory `frontend/` and run `npm install`
   3. add a file with the name `.env.development.local` to the root directory of this project folder; the field should contain the following content:
    
     # PORT
@@ -27,7 +27,7 @@ To run the code, please install the newest `node js`, `sqlite` and `typescript t
     # CORS
     ORIGIN = *
     CREDENTIALS = true
-  4. run `npm run dev`
+  4. run `npm run dev` in the `src/` directory to start the backend and run it in the directory `frontend/` too. There you start the frontend. If the frontend is started, you can reach it: http://localhost:8080
   Have fun.
 
 # Project structure
