@@ -27,7 +27,7 @@ To run the code, please install the newest `node js`.
     # CORS
     ORIGIN = *
     CREDENTIALS = true
-  4. run `npm run dev` in the `src/` directory to start the backend and run it in the directory `frontend/` too. There you start the frontend. If the frontend is started, you can reach it: http://localhost:8080
+  4. run `npm run dev` in the `src/` directory to start the backend and run it in the directory `frontend/` too. **(you need 2 terminal tabs, because after running the command, the terminal tab is active and in action)** There you start the frontend. If the frontend is started, you can reach it: http://localhost:8080
   Have fun.
 
 # Project structure
