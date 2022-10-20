@@ -31,7 +31,8 @@ To run the code, please install the newest `node js`-
   Have fun.
 
 # Project structure
-- src/ (All code for the backend/api)
+- frontend/ (All code for frontend)
+- src/ (All code for the backend/api/game engine)
   - app/ (Place for the game application (logic etc.))
   - config/ (Configdirectory to load values from .env files)
   - controllers/ (HTTP-Controllers for the api)
